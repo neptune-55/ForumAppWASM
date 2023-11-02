@@ -1,0 +1,64 @@
+h3 {
+    font-size: 20px;
+    color: #0079d3;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+tr {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 1000px;
+    padding: 25px;
+    text-align: center;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+td.label {
+    flex: 1;
+    font-weight: bold;
+    color: #333;
+}
+
+td.content {
+    flex: 3;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+    color: #e01d1d;
+    margin-top: 10px;
+    display: block;
+}
+
+.field, .textarea {
+    margin-top: 20px;
+}
+
+.acceptbtn {
+    background-color: lightgreen;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.button-row {
+    margin-top: 15px;
+}
+
+.expand {
+    width:30px;
+    height:30px;
+    cursor: pointer;
+}

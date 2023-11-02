@@ -1,0 +1,96 @@
+﻿@page "/CreatePost"
+@attribute [Authorize]
+@using global::Shared.DTOs
+@using global::Shared.Models
+@using HttpClients.ClientInterfaces
+@inject IUserService userService
+@inject IPostService postService
+@inject NavigationManager navMgr
+
+<div class="card">
+    @if (users == null)
+    {
+        <label>Loading users...</label>
+    }
+    else if (!users.Any())
+    {
+        <label>No users</label> // Theoretically this should never be displayed because this page will only be visible after login, but this is for development purposes
+    }
+    else
+    {
+        <h3>Create Post</h3>
+        <div class="form-group field">
+            <label>Title:</label>
+            <input type="text" class="form-control" @bind="title"/>
+        </div>
+        <div class="form-group field">
+            <label>Body:</label>
+            <textarea class="form-control" @bind="body"></textarea>
+        </div>
+        <div class="button-row">
+            @if (!string.IsNullOrEmpty(msg))
+            {
+                <label style="color: red">@msg</label>
+            }
+            <button @onclick="CreateAsync" class="acceptbtn">Post</button>
+        </div>
+    }
+</div>
+
+@code {
+    private IEnumerable<User>? users;
+    private string msg = "";
+    private string title = "";
+    private string body = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        msg = "";
+        try
+        {
+            users = await userService.GetUsersAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+    
+    private async Task CreateAsync()
+    {
+        msg = "";
+        if (string.IsNullOrEmpty(title))
+        {
+            msg = "Title cannot be empty!";
+            return;
+        }
+        if (title.Length > 100)
+        {
+            msg = "Title cannot be longer than 100 characters!";
+            return;
+        }
+        if (string.IsNullOrEmpty(body))
+        {
+            msg = "Body cannot be empty!";
+            return;
+        }
+        if (body.Length > 3000)
+        {
+            msg = "Body cannot be longer than 3000 characters!";
+            return;
+        }
+
+        try
+        {
+            PostBasicDto dto = new(1, title, body); // Mario makes all posts now because this is temporary, it will be bound to login info when we implement authentication
+            await postService.CreateAsync(dto);
+            navMgr.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+}

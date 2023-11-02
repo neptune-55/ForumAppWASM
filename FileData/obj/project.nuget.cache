@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "ND7sUgd7dFFKysDp9GaSejsprjFxoRa42MwBxj+u+8EfxOh/xHdRvUKZSGs24Q4nUW9PzNBgqGlxllSLPs+J/w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Acer\\RiderProjects\\PlebbitAppWASM\\FileData\\FileData.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Acer\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.8\\microsoft.aspnetcore.authorization.6.0.8.nupkg.sha512",
+    "C:\\Users\\Acer\\.nuget\\packages\\microsoft.aspnetcore.metadata\\6.0.8\\microsoft.aspnetcore.metadata.6.0.8.nupkg.sha512",
+    "C:\\Users\\Acer\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Acer\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.1\\microsoft.extensions.logging.abstractions.6.0.1.nupkg.sha512",
+    "C:\\Users\\Acer\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\Acer\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\Acer\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

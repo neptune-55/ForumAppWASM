@@ -1,0 +1,104 @@
+﻿@page "/ViewPosts"
+@attribute [Authorize]
+@using global::Shared.DTOs
+@using global::Shared.Models
+@using HttpClients.ClientInterfaces
+@inject IPostService postService
+@inject IUserService userService
+@inject NavigationManager navMgr
+
+<h3>Posts</h3>
+<div>
+    <button @onclick="LoadPosts">Load</button>
+</div>
+
+@if (posts == null)
+{
+    
+}
+else if (!posts.Any())
+{
+    <p>No posts to display</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Title</th>
+            <th>Expand</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var post in posts)
+        {
+            <tr>
+                <td>@post.Id</td>
+                <td>@FindUsername(post.PosterId)</td>
+                <td>@post.Title</td>
+                <td>
+                    <img src="icons/expand.png" class="expand" style="width:50px; height:50px; cursor:pointer" @onclick="@(() => navMgr.NavigateTo($"/ViewPost/{post.Id}"))"/>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+@if (!string.IsNullOrEmpty(msg))
+{
+    <label style="color: red">@msg</label>
+}
+
+@code {
+    private IEnumerable<Post> posts;
+    private IEnumerable<User>? users;
+    private string msg = "";
+    private string username = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        msg = "";
+        try
+        {
+            users = await userService.GetUsersAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+    
+    private async Task LoadPosts()
+    {
+        try
+        {
+            posts = await postService.GetAsync(null, null, null, null); // Unfortunately deadline was too close to implement filtering functionality
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+    private string FindUsername(int posterId)
+    {
+        if (users == null)
+        {
+            throw new Exception("Users are not loaded");
+        }
+        
+        @foreach (var user in users)
+        {
+            if (user.Id == posterId)
+            {
+                return user.Username;
+            }
+        }
+        
+        throw new Exception("User with this ID does not exist");
+    }
+}
